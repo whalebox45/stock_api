@@ -1,5 +1,5 @@
 var connection = require('./mysql_config');
-connection.connect();
+connection.con.connect();
 
 security_code = "1234";
 
