@@ -5,6 +5,12 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+app.post('/ohlc:stockid', function(req,res){
+
+
+})
+
 app.get('/listUsers', function (req, res) {
    fs.readFile("./" + "users.json", 'utf8', function (err, data) {
        console.log( data );

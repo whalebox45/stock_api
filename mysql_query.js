@@ -1,4 +1,4 @@
-var config = require("./mysql_config.js");
+var config = require("mysql_config.js");
 var db = config.db;
 
 
