@@ -4,7 +4,8 @@ var db_options ={
         user: 'stock_eagle',
         password: 'ha',
         database: 'stock_eagle',
-        timezone: 'Z'
+        timezone: 'Z',
+	dateStrings: 'date'
 };
 var db = null;
 db = mysql.createConnection(db_options);

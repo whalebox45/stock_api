@@ -13,12 +13,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/ohlc/:stockid', function(req,res){
     security_code = req.params.stockid;
-    db.query('select date, security_code, name,'+
+    db.query('select date,'+
     'open_price, highest_price, lowest_price, closing_price '+
-    'from stock_2018 where security_code=? ;',[security_code],
+    'from stock_2018 where security_code=? order by date;',[security_code],
     function(err,row,fields){
         if(err) throw err;
-        res.end(JSON.stringify(row));
+        res.end(JSON.stringify(row,null,' '));
     })
     
 })
