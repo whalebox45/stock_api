@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./routes')(app);
 
-<<<<<<< HEAD
 app.get('/ohlc/:stockid', function(req,res){
     security_code = req.params.stockid;
     db.query('select date,'+
@@ -22,9 +21,6 @@ app.get('/ohlc/:stockid', function(req,res){
     
 })
 
-
-=======
->>>>>>> 2ab6029e5aad034b167f0196e5a5f04ca207e636
 var server = app.listen(8081, function () {
   var host = server.address().address
   var port = server.address().port
