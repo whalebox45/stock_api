@@ -2,7 +2,7 @@ var mysql = new require('mysql')
 var db_options ={
         host: 'localhost',
         user: 'stock_eagle',
-        password: 'ha',
+        password: 'hoia',
         database: 'stock_eagle',
         timezone: 'Z',
 	dateStrings: 'date'
