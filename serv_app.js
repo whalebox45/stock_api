@@ -11,6 +11,8 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+require('./routes')(app);
+
 app.get('/ohlc/:stockid', function(req,res){
     security_code = req.params.stockid;
     db.query('select date, security_code, name,'+
