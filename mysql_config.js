@@ -1,10 +1,10 @@
 var mysql = new require('mysql')
 var db_options ={
-        host: 'localhost',
-        user: 'stock_eagle',
-        password: 'hoia',
-        database: 'stock_eagle',
-        timezone: 'Z',
+	host: 'localhost',
+	user: 'stock_eagle',
+	password: 'hoia',
+	database: 'stock_eagle',
+	timezone: 'Z',
 	dateStrings: 'date'
 };
 var db = null;

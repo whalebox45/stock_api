@@ -10,6 +10,7 @@ module.exports = function(app){
 		'ORDER BY cast(pe_ratio as DECIMAL(5,2)) LIMIT 10;',
 		function(err,row,fields){
 			if(err) throw err;
+			res.set({ 'content-type': 'application/json; charset=utf-8' })
 			res.end(JSON.stringify(row));
 		})
 	});
@@ -22,6 +23,7 @@ module.exports = function(app){
 		[security_code],
 		function(err,row,fields){
 			if(err) throw err;
+			res.set({ 'content-type': 'application/json; charset=utf-8' })
 			res.end(JSON.stringify(row));
 		})
 	})
