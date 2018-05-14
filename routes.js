@@ -9,6 +9,8 @@ module.exports = function(app){
 	})
 
 	app.post('/json_test',function(req,res){
+		res.set({'content-type':'application/json; charset=utf-8'})
+		res.send(JSON.stringify({test:ok}));
 		console.log(req.body);
 	})
 
