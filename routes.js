@@ -5,7 +5,7 @@ var db = mysql.db;
 module.exports = function(app){
 
 	app.get('/api',function(req,res){
-		red.send(500);
+		res.sendStatus(500);
 	})
 
 	app.get('/pe_ratio', function(req,res){
