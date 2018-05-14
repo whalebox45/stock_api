@@ -33,12 +33,12 @@ module.exports = function(app){
 	})
 
 	app.all('*', function(req, res) {
-		res.send(404);
+		res.sendStatus(404);
 	});
 
 	app.use(function(req, res, next){
-		res.sendStatus(404);
-	  
+		res.status(404);
+  
 		// respond with html page
 		if (req.accepts('html')) {
 		  res.render('404', { url: req.url });
