@@ -3,6 +3,12 @@ var mysql = require("./mysql_config");
 var db = mysql.db;
 
 module.exports = function(app){
+
+	app.get('/api',function(req,res){
+		res.set({'content-type:':'application/json; charset=utf-8'})
+		res.send('this is api');
+	})
+
 	app.get('/pe_ratio', function(req,res){
 		console.log('got the get');
 		db.query('SELECT date, security_code, name, pe_ratio FROM stock_eagle.pepb_2018 '+
@@ -26,5 +32,10 @@ module.exports = function(app){
 			res.set({ 'content-type': 'application/json; charset=utf-8' })
 			res.end(JSON.stringify(row));
 		})
+	})
+
+	app.use(function(err,req,res,next){
+		console.error(err.stack);
+		res.status(500).send('500');
 	})
 };
