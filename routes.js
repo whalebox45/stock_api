@@ -29,7 +29,7 @@ module.exports = function(app){
 		function(err,row,fields){
 			if(err) throw err;
 			res.set({ 'content-type': 'application/json; charset=utf-8' })
-			res.end(JSON.stringify(row));
+			res.end(JSON.stringify(row,null,' '));
 		})
 	})
 

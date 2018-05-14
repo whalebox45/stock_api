@@ -9,17 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 require('./routes')(app);
 
-app.get('/ohlc/:stockid', function(req,res){
-    security_code = req.params.stockid;
-    db.query('select date,'+
-    'open_price, highest_price, lowest_price, closing_price '+
-    'from stock_2018 where security_code=? order by date;',[security_code],
-    function(err,row,fields){
-        if(err) throw err;
-        res.end(JSON.stringify(row,null,' '));
-    })
-    
-})
 
 var server = app.listen(8081, function () {
   var host = server.address().address
