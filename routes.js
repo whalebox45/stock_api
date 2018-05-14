@@ -4,13 +4,8 @@ var db = mysql.db;
 
 module.exports = function(app){
 
-	app.get('/',function(req,res){
-		res.status(500);
-	})
-
 	app.get('/api',function(req,res){
-		res.set({'content-type:':'application/json; charset=utf-8'})
-		res.end('this is api');
+		red.send(500);
 	})
 
 	app.get('/pe_ratio', function(req,res){
@@ -37,8 +32,26 @@ module.exports = function(app){
 		})
 	})
 
-	app.use(function(err,req,res,next){
-		console.error(err.stack);
-		res.status(500).send('500');
-	})
+	app.all('*', function(req, res) {
+		res.send(404);
+	});
+
+	app.use(function(req, res, next){
+		res.status(404);
+	  
+		// respond with html page
+		if (req.accepts('html')) {
+		  res.render('404', { url: req.url });
+		  return;
+		}
+	  
+		// respond with json
+		if (req.accepts('json')) {
+		  res.send({ error: 'Not found' });
+		  return;
+		}
+	  
+		// default to plain-text. send()
+		res.type('txt').send('Not found');
+	  });
 };
