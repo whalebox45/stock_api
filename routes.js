@@ -37,7 +37,7 @@ module.exports = function(app){
 	});
 
 	app.use(function(req, res, next){
-		res.status(404);
+		res.sendStatus(404);
 	  
 		// respond with html page
 		if (req.accepts('html')) {
