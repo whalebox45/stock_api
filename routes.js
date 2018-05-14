@@ -4,6 +4,10 @@ var db = mysql.db;
 
 module.exports = function(app){
 
+	app.get('/',function(req,res){
+		res.status(500);
+	})
+
 	app.get('/api',function(req,res){
 		res.set({'content-type:':'application/json; charset=utf-8'})
 		res.send('this is api');
