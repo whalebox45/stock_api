@@ -8,7 +8,10 @@ module.exports = function(app){
 		res.sendStatus(500);
 	})
 
+
+
 	app.get('/pe_ratio', function(req,res){
+		console.log(req.query.category);
 		db.query('SELECT date, security_code, name, pe_ratio FROM stock_eagle.pepb_2018 '+
 		'WHERE date = (SELECT distinct date FROM pepb_2018 ORDER BY date DESC LIMIT 1) AND pe_ratio != 0 '+
 		'ORDER BY cast(pe_ratio as DECIMAL(5,2)) LIMIT 10;',
