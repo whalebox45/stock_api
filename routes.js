@@ -10,7 +10,7 @@ module.exports = function(app){
 
 	app.get('/api',function(req,res){
 		res.set({'content-type:':'application/json; charset=utf-8'})
-		res.send('this is api');
+		res.end('this is api');
 	})
 
 	app.get('/pe_ratio', function(req,res){
