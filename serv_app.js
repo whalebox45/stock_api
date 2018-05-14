@@ -10,11 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require('./routes')(app);
 
 
-var server = app.listen(8081, function () {
+var server = app.listen(3001, function () {
   var host = server.address().address
   var port = server.address().port
-
-  
   console.log("Web app listening at http://%s:%s", host, port)
 })
 

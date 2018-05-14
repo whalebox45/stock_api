@@ -8,7 +8,9 @@ module.exports = function(app){
 		res.sendStatus(500);
 	})
 
-
+	app.post('/json_test',function(req,res){
+		console.log(req.body);
+	})
 
 	app.get('/pe_ratio', function(req,res){
 		console.log(req.query.category);
