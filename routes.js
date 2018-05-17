@@ -4,6 +4,15 @@ var db = mysql.db;
 
 module.exports = function (app) {
 
+	app.get('/price_diff', function(req,res){
+		res.set({ 'content-type': 'application/json; charset=utf-8' });
+		db.query('call stock_eagle.wm_diff();',
+		function(err,row,fields){
+			if(err) throw err;
+			res.end(JSON.stringify(row));
+		});
+	})
+
 	app.get('/div_yield', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		db.query('SELECT date, security_code,name,dividend_yield FROM stock_eagle.pepb_2018 ' +
