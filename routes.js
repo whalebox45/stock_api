@@ -9,7 +9,7 @@ module.exports = function (app) {
 		db.query('call stock_eagle.wm_diff();',
 		function(err,row,fields){
 			if(err) throw err;
-			res.end(JSON.stringify(row));
+			res.end(JSON.stringify(row[0]));
 		});
 	})
 
@@ -21,7 +21,7 @@ module.exports = function (app) {
 			'ORDER BY cast(dividend_yield AS DECIMAL(5,2)) DESC LIMIT 10;',
 			function (err, row, fields) {
 				if (err) throw err;
-				res.end(JSON.stringify(row));
+				res.end(JSON.stringify(row[0]));
 			});
 	})
 
@@ -39,18 +39,18 @@ module.exports = function (app) {
 			function (err, row, fields) {
 				if (err) throw err;
 				res.set({ 'content-type': 'application/json; charset=utf-8' })
-				res.end(JSON.stringify(row));
+				res.end(JSON.stringify(row[0]));
 			});
 	});
 
 	app.get('/ohlc/:stockid', function (req, res) {
 		security_code = req.params.stockid;
-		db.query('call stock_eagle.ohlc(?);' +
+		db.query("call stock_eagle.ohlc(?)",
 			[security_code],
 			function (err, row, fields) {
 				if (err) throw err;
 				res.set({ 'content-type': 'application/json; charset=utf-8' })
-				res.end(JSON.stringify(row, null, ' '));
+				res.end(JSON.stringify(row[0]));
 			});
 	})
 
