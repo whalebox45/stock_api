@@ -45,7 +45,7 @@ module.exports = function (app) {
 
 	app.get('/ohlc/:stockid', function (req, res) {
 		security_code = req.params.stockid;
-		db.query('call stock_eagle.ohlc(\'?\');' +
+		db.query('call stock_eagle.ohlc(?);' +
 			[security_code],
 			function (err, row, fields) {
 				if (err) throw err;
