@@ -2,7 +2,7 @@
   "name": "web_test",
   "version": "1.0.0",
   "description": "",
-  "main": "mysql_config.js",
+  "main": "serv_app.js",
   "scripts": {
     "start": "node serv_app.js"
   },
