@@ -32,10 +32,10 @@ module.exports = function (app) {
 	})
 
 	app.get('/pe_ratio', function (req, res) {
-		var limit_bound = function(){
-			if(!!req.query.bound)return req.query.bound;
-			else return 15;
-		}
+		var limit_bound;
+		if(!!req.query.bound) limit_bound=req.query.bound;
+		else limit_bound=15;
+		
 		console.log(req.query.bound,limit_bound);
 		db.query('call stock_eagle.pe_ratio(?);',[limit_bound],
 			function (err, row, fields) {
