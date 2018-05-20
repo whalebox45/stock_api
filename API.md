@@ -1,14 +1,14 @@
 **K線圖值**
 ----
 
-* **URL**
+* **URL:**
 	`/ohlc/:stockid`
 * **Method:**
 	`GET`
-* **URL Params**
+* **URL Params:**
 	**Required:**
 	`stockid=[strings]`
-* **Data Params**
+* **Data Params:**
 	None
 * **Success Response:**
 	* **Code:** 200
@@ -17,32 +17,44 @@
 	* **Code:** 404 NOT FOUND
 	* **Content:** `{ error : "Not found" }`
 * **Sample Call:**
-  ```javascript
-    $.ajax({
-      url: "/ohlc/1101",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
-      }
-    });  ```
+```javascript
+$.ajax({
+	url: "/ohlc/1101",
+	dataType: "json",
+	type : "GET",
+	success : function(r) {
+		console.log(r);
+	}
+});
+```
 <br />
 
 **測試請求**
 ----
 
-* **URL**
+* **URL:**
 	`/json_test`
-* **Method**
+* **Method:**
 	`GET`
-* **URL Params**
+* **URL Params:**
 	None
-* **Data Params**
+* **Data Params:**
 	None
-* **Success Response**
+* **Success Response:**
 	* **Code:** 200
 	* **Content:** `{'test','ok'}`
 
-* **Error Response**
+* **Error Response:**
 	* **Code:** 404
 	* **Content:** `{'error','Not found'}`
+* **Sameple Call:**
+```javascript
+$.ajax({
+	url: "/json_test",
+	dataType: "json",
+	type : "GET",
+	success : function(r) {
+		console.log(r);
+	}
+});
+```
