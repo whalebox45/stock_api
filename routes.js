@@ -25,8 +25,11 @@ module.exports = function (app) {
 	})
 
 	app.get('/div_yield', function (req, res) {
+		var bound;
+		if(!!req.query.bound) bound=req.query.bound;
+		else bound = 0;
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
-		db.query("call stock_eagle.div_yield();",
+		db.query("call stock_eagle.div_yield(?);", [bound],
 			function (err, row, fields) {
 				if (err) throw err;
 				res.end(JSON.stringify(row[0]));
