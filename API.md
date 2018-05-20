@@ -2,7 +2,7 @@
 ----
 
 * **URL**
-	/ohlc/:stockid
+	`/ohlc/:stockid`
 * **Method:**
 	`GET`
 * **URL Params**
@@ -11,10 +11,10 @@
 * **Data Params**
 	None
 * **Success Response:**
-	* **Code:** 200 <br />
+	* **Code:** 200
 	* **Content:** `{"date":"2018-05-18","security_code":"1101","name":"台       泥","open_price":"46.00","high_price":"46.15","low_price":"45.10","close_price":"45.55"}`
 * **Error Response:**
-	* **Code:** 404 NOT FOUND <br />
+	* **Code:** 404 NOT FOUND
 	* **Content:** `{ error : "Not found" }`
 * **Sample Call:**
   ```javascript
@@ -32,7 +32,7 @@
 ----
 
 * **URL**
-	/json_test
+	`/json_test`
 * **Method**
 	`GET`
 * **URL Params**
@@ -40,9 +40,9 @@
 * **Data Params**
 	None
 * **Success Response**
-	* **Code:** 200 <br/>
+	* **Code:** 200
 	* **Content:** `{'test','ok'}`
 
 * **Error Response**
-	* **Code:** 404 <br/>
+	* **Code:** 404
 	* **Content:** `{'error','Not found'}`
