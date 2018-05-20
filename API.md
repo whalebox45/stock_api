@@ -8,7 +8,7 @@
   * **Required:**
     |param|desc|
     |-|-|
-    |`stockid=[alphanumeric]`|選擇該股票代號的250天的日K線股價｜
+    |`stockid=[alphanumeric]`|選擇該股票代號的250天的日K線股價|
 * **Data Params**
   None
 * **Success Response:**
