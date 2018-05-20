@@ -12,10 +12,10 @@
 	None
 * **Success Response:**
 	* **Code:** 200 <br />
-		**Content:** `{"date":"2018-05-18","security_code":"1101","name":"台       泥","open_price":"46.00","high_price":"46.15","low_price":"45.10","close_price":"45.55"}`
+	* **Content:** `{"date":"2018-05-18","security_code":"1101","name":"台       泥","open_price":"46.00","high_price":"46.15","low_price":"45.10","close_price":"45.55"}`
 * **Error Response:**
 	* **Code:** 404 NOT FOUND <br />
-		**Content:** `{ error : "Not found" }`
+	* **Content:** `{ error : "Not found" }`
 * **Sample Call:**
   ```javascript
     $.ajax({
@@ -41,8 +41,8 @@
 	None
 * **Success Response**
 	* **Code:** 200 <br/>
-		**Content:** `{'test','ok'}`
+	* **Content:** `{'test','ok'}`
 
 * **Error Response**
 	* **Code:** 404 <br/>
-		**Content:** `{'error','Not found'}`
+	* **Content:** `{'error','Not found'}`
