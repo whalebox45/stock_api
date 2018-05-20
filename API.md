@@ -5,7 +5,7 @@
 * **Method:**
   `GET` 
 *  **URL Params**
-  * **Required:**
+    * **Required:**
   
     |param|desc|
     |-|-|
@@ -57,7 +57,7 @@
   |param|desc|
   |-|-|
   |`bound=[float]`|選擇出小於bound值的當天本益比資料<br/>若無則預設15
-  
+
 * **Success Response**
     * **Code:** 200 <br/>
     *  **Content:** 
