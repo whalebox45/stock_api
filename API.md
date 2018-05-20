@@ -53,7 +53,8 @@
 * **URL Params**
   None
 * **Data Params**
-
+  * Optional
+  
   |param|desc|
   |-|-|
   |`bound=[float]`|選擇出小於bound值的當天本益比資料<br/>若無則預設15
