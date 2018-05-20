@@ -44,3 +44,31 @@
     });
   ```
 <br />
+
+**測試請求**
+----
+
+* **URL**
+
+ /json_test
+
+* **Method**
+
+ `GET`
+
+* **URL Params**
+ 
+ None
+
+* **Data Params**
+
+ None
+
+* **Success Response**
+
+    * **Code:** 200 <br/>
+      **Content:** `{'test','ok'}`
+
+* **Error Response**
+    * **Code:** 404 <br/>
+      **Content:** `{'error','Not found'}`

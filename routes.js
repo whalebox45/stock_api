@@ -4,6 +4,17 @@ var db = mysql.db;
 
 module.exports = function (app) {
 
+	app.get('/ohlc/:stockid', function (req, res) {
+		var security_code = req.params.stockid;
+		db.query("call stock_eagle.ohlc(?)",
+			[security_code],
+			function (err, row, fields) {
+				if (err) throw err;
+				res.set({ 'content-type': 'application/json; charset=utf-8' })
+				res.end(JSON.stringify(row[0]));
+			});
+	})
+
 	app.get('/price_diff', function(req,res){
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		db.query('call stock_eagle.wm_diff();',
@@ -15,20 +26,11 @@ module.exports = function (app) {
 
 	app.get('/div_yield', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
-		db.query('SELECT date, security_code,name,dividend_yield FROM stock_eagle.pepb_2018 ' +
-			'WHERE date = (SELECT DISTINCT DATE FROM pepb_2018 ORDER BY date DESC LIMIT 1) ' +
-			'AND dividend_yield > 0 ' +
-			'ORDER BY cast(dividend_yield AS DECIMAL(5,2)) DESC LIMIT 10;',
+		db.query("call stock_eagle.div_yield();",
 			function (err, row, fields) {
 				if (err) throw err;
 				res.end(JSON.stringify(row[0]));
 			});
-	})
-
-	app.get('/json_test', function (req, res) {
-		res.set({ 'content-type': 'application/json; charset=utf-8' });
-		res.end(JSON.stringify({ test: 'ok' }));
-		console.log(req.body);
 	})
 
 	app.get('/pe_ratio', function (req, res) {
@@ -43,15 +45,10 @@ module.exports = function (app) {
 			});
 	});
 
-	app.get('/ohlc/:stockid', function (req, res) {
-		var security_code = req.params.stockid;
-		db.query("call stock_eagle.ohlc(?)",
-			[security_code],
-			function (err, row, fields) {
-				if (err) throw err;
-				res.set({ 'content-type': 'application/json; charset=utf-8' })
-				res.end(JSON.stringify(row[0]));
-			});
+	app.get('/json_test', function (req, res) {
+		res.set({ 'content-type': 'application/json; charset=utf-8' });
+		res.end(JSON.stringify({ "test": 'ok' }));
+		console.log(req.body);
 	})
 
 	app.all('*', function (req, res) {
