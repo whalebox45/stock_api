@@ -1,38 +1,22 @@
 **K線圖值**
 ----
-  
 
 * **URL**
-
-  /ohlc/:stockid
-
+	/ohlc/:stockid
 * **Method:**
-
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
- 
-   `stockid=[strings]`
-
+	`GET`
+* **URL Params**
+	**Required:**
+	`stockid=[strings]`
 * **Data Params**
-
-  None
-
+	None
 * **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{"date":"2018-05-18","security_code":"1101","name":"台泥","open_price":"46.00","high_price":"46.15","low_price":"45.10","close_price":"45.55"}`
- 
+	* **Code:** 200 <br />
+		**Content:** `{"date":"2018-05-18","security_code":"1101","name":"台       泥","open_price":"46.00","high_price":"46.15","low_price":"45.10","close_price":"45.55"}`
 * **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "Not found" }`
-
-
+	* **Code:** 404 NOT FOUND <br />
+		**Content:** `{ error : "Not found" }`
 * **Sample Call:**
-
   ```javascript
     $.ajax({
       url: "/ohlc/1101",
@@ -41,34 +25,24 @@
       success : function(r) {
         console.log(r);
       }
-    });
-  ```
+    });  ```
 <br />
 
 **測試請求**
 ----
 
 * **URL**
-
- /json_test
-
+	/json_test
 * **Method**
-
- `GET`
-
+	`GET`
 * **URL Params**
- 
- None
-
+	None
 * **Data Params**
-
- None
-
+	None
 * **Success Response**
-
-    * **Code:** 200 <br/>
-      **Content:** `{'test','ok'}`
+	* **Code:** 200 <br/>
+		**Content:** `{'test','ok'}`
 
 * **Error Response**
-    * **Code:** 404 <br/>
-      **Content:** `{'error','Not found'}`
+	* **Code:** 404 <br/>
+		**Content:** `{'error','Not found'}`
