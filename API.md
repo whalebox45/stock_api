@@ -1,5 +1,4 @@
 **K線圖值**
-<<<<<<< HEAD
 ---
 * **URL**
   `/ohlc/:stockid`
@@ -176,5 +175,4 @@ $.ajax({
 		console.log(r);
 	}
 });
-```
->>>>>>> 5f1570d4f1d7ddc2abb13878da07c6469542dd97
+
