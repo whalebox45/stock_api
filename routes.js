@@ -34,10 +34,10 @@ module.exports = function (app) {
 	})
 
 	app.get('/pe_ratio', function (req, res) {
-		var limit_bound;
-		if(!!req.query.bound) limit_bound=req.query.bound;
-		else limit_bound=15;
-		db.query('call stock_eagle.pe_ratio(?);',[limit_bound],
+		var bound;
+		if(!!req.query.bound) bound=req.query.bound;
+		else bound=15;
+		db.query('call stock_eagle.pe_ratio(?);',[bound],
 			function (err, row, fields) {
 				if (err) throw err;
 				res.set({ 'content-type': 'application/json; charset=utf-8' })
