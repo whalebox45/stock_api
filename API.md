@@ -9,7 +9,7 @@
   
     |param|desc|
     |-|-|
-    |`stockid=[alphanumeric]`|選擇該股票代號的250天的日K線股價|
+    |`stockid=[alphanumeric]`|選擇該股票代號的250天的日K線股價
     
 * **Data Params**
   None
@@ -53,6 +53,7 @@
 * **URL Params**
   None
 * **Data Params**
+
   |param|desc|
   |-|-|
   |`bound=[float]`|選擇出小於bound值的當天本益比資料<br/>若無則預設15
