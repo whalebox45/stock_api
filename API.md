@@ -93,6 +93,54 @@
   ```
 ---- 
 
+**殖利率**
+----
+* **URL**
+ `/div_yield`
+* **Method**
+ `GET`
+* **URL Params**
+ None
+* **Data Params**
+ * Optional
+
+ |param|desc|
+ |-|-|
+ |`bound=[flaot]`|選擇出大於bound值得當日值利率資料<br />否則選擇出大於0(所有)的資料
+* **Success Response**
+    * **Code:** 200 <br/>
+    *  **Content:** 
+    ```js
+    {
+    "date": "2018-05-21",
+    "security_code": 3040,
+    "name": "遠見",
+    "dividend_yield": 16.07
+    },
+    {
+      "date": "2018-05-21",
+      "security_code": 1463,
+      "name": "強盛",
+      "dividend_yield": 13.3
+    },
+    ...
+    ```
+* **Error Response**
+    * **Code:** 404 <br/>
+    *  **Content:** `{'error','Not found'}`
+* **Sample Call:**
+  ```javascript
+    $.ajax({
+      url: "/div_yield?bound=10",
+      datatype: "json",
+      type: "GET",
+      success: function(r){
+        console.log(r);
+      }
+    })
+  ```
+---
+
 **測試請求**
 ----
 * **URL**
