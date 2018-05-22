@@ -1,52 +1,56 @@
 
 var mysql = require("./mysql_config");
-var db = mysql.db;
+var pool = mysql.pool;
 
 module.exports = function (app) {
 
 	app.get('/ohlc/:stockid', function (req, res) {
 		var security_code = req.params.stockid;
-		db.query("call stock_eagle.ohlc(?)",
-			[security_code],
-			function (err, row, fields) {
-				if (err) throw err;
-				res.set({ 'content-type': 'application/json; charset=utf-8' })
-				res.end(JSON.stringify(row[0]));
-				db.end();
-			});
+		pool.getConnection(function (err, conn) {
+			conn.query("call stock_eagle.ohlc(?)",
+				[security_code],
+				function (err, row, fields) {
+					conn.release();
+					if (err){
+						res.sendStatus(400);
+					}
+					res.set({ 'content-type': 'application/json; charset=utf-8' })
+					res.end(JSON.stringify(row[0]));
+				});
+		})
 	})
-
-	app.get('/price_diff', function(req,res){
+/*
+	app.get('/price_diff', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		db.query('call stock_eagle.wm_diff();',
-		function(err,row,fields){
-			if(err) throw err;
-			res.end(JSON.stringify(row[0]));
-		});
+			function (err, row, fields) {
+				if (err) res.sendStatus(400);
+				res.end(JSON.stringify(row[0]));
+			});
 	})
 
 	app.get('/div_yield', function (req, res) {
 		var bound = req.query.bound
-		if(isNaN(parseFloat(bound))) bound = 0;
+		if (isNaN(parseFloat(bound))) bound = 0;
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		db.query("call stock_eagle.div_yield(?);", [bound],
 			function (err, row, fields) {
-				if (err) throw err;
+				if (err) res.sendStatus(400);
 				res.end(JSON.stringify(row[0]));
 			});
 	})
 
 	app.get('/pe_ratio', function (req, res) {
 		var bound = req.query.bound;
-		if(isNaN(parseFloat(bound))) bound = 15;
-		db.query('call stock_eagle.pe_ratio(?);',[bound],
+		if (isNaN(parseFloat(bound))) bound = 15;
+		db.query('call stock_eagle.pe_ratio(?);', [bound],
 			function (err, row, fields) {
 				if (err) throw err;
 				res.set({ 'content-type': 'application/json; charset=utf-8' })
 				res.end(JSON.stringify(row[0]));
 			});
 	});
-
+*/
 	app.get('/json_test', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		res.end(JSON.stringify({ "test": 'ok' }));
@@ -59,20 +63,33 @@ module.exports = function (app) {
 
 	app.use(function (req, res, next) {
 		res.status(404);
-
 		// respond with html page
 		if (req.accepts('html')) {
 			res.render('404', { url: req.url });
 			return;
 		}
-
 		// respond with json
 		if (req.accepts('json')) {
 			res.send({ error: 'Not found' });
 			return;
 		}
-
 		// default to plain-text. send()
 		res.type('txt').send('Not found');
 	});
+
+	app.use(function (req, res, next) {
+		res.status(400);
+		// respond with html page
+		if (req.accepts('html')) {
+			res.render('400', { url: req.url });
+			return;
+		}
+		// respond with json
+		if (req.accepts('json')) {
+			res.send({ error: 'Bad request' });
+			return;
+		}
+		// default to plain-text. send()
+		res.type('txt').send('Bad request');
+	})
 };
