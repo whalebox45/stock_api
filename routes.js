@@ -67,6 +67,7 @@ module.exports = function (app) {
 	
 	app.get('/json_test', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
+		res.render('send', { csrfToken: req.csrfToken() })
 		res.end(JSON.stringify({ "test": 'ok' }));
 		console.log(req.body);
 	})
