@@ -26,6 +26,7 @@ module.exports = function (app) {
 
 	app.get('/div_yield', function (req, res) {
 		var bound;
+		console.log(req.query.bound,typeof req.query.bound)
 		if(!!req.query.bound) bound=req.query.bound;
 		else bound = 0;
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
