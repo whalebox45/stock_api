@@ -3,10 +3,20 @@ var fs = require("fs");
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 
+var csurf = require('csurf');
+var cookieParser = require('cookie-parser');
+var csrfMiddleware = csurf({
+  cookie: true
+});
+
+
 var app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(csrfMiddleware);
 
 app.use(morgan('short'));
 
