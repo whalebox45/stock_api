@@ -2,28 +2,21 @@ var express = require('express');
 var fs = require("fs");
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-
-var csurf = require('csurf');
-var cookieParser = require('cookie-parser');
-var csrfMiddleware = csurf({
-  cookie: true
-});
-
-var allowCrossDomain = function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-}
-
+const Ajv = require('ajv');
+var cors = require('cors')
 
 var app = express();
+
+
+app.use(cors())
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser());
-app.use(csrfMiddleware);
+app.use((req, res, next) => {
+  res.setHeader('Content-Type', 'application/json')
+  next();
+});
 
 app.use(morgan('short'));
 
