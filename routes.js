@@ -12,6 +12,7 @@ module.exports = function (app) {
 				if (err) throw err;
 				res.set({ 'content-type': 'application/json; charset=utf-8' })
 				res.end(JSON.stringify(row[0]));
+				connection.end();
 			});
 	})
 
