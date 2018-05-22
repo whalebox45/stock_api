@@ -25,10 +25,8 @@ module.exports = function (app) {
 	})
 
 	app.get('/div_yield', function (req, res) {
-		var bound;
-		console.log(req.query.bound,typeof req.query.bound)
-		if(!!req.query.bound) bound=req.query.bound;
-		else bound = 0;
+		var bound = req.query.bound
+		if(isNaN(parseFloat(bound))) bound = 0;
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		db.query("call stock_eagle.div_yield(?);", [bound],
 			function (err, row, fields) {
@@ -38,9 +36,8 @@ module.exports = function (app) {
 	})
 
 	app.get('/pe_ratio', function (req, res) {
-		var bound;
-		if(!!req.query.bound) bound=req.query.bound;
-		else bound=15;
+		var bound = req.query.bound;
+		if(isNaN(parseFloat(bound))) bound = 15;
 		db.query('call stock_eagle.pe_ratio(?);',[bound],
 			function (err, row, fields) {
 				if (err) throw err;
