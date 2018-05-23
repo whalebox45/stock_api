@@ -106,7 +106,8 @@
 
  |param|desc|
  |-|-|
- |`bound=[flaot]`|選擇出大於bound值得當日值利率資料<br />否則選擇出大於0(所有)的資料
+ |`bound=[float]`|選擇出小於bound值得當日值利率資料<br />否則選擇出小於4.5%的資料|
+ |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名
 * **Success Response**
     * **Code:** 200 <br/>
     *  **Content:** 
@@ -131,7 +132,7 @@
 * **Sample Call:**
   ```javascript
     $.ajax({
-      url: "/div_yield?bound=10",
+      url: "/div_yield?bound=10&limit=20",
       datatype: "json",
       type: "GET",
       success: function(r){

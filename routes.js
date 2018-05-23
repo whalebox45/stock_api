@@ -38,10 +38,11 @@ module.exports = function (app) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 
 		var bound = req.query.bound
-		if (isNaN(parseFloat(bound))) bound = 0;
-
+		var limit = req.query.limit
+		if (isNaN(parseFloat(bound))) bound = 4.5
+		if (isNaN(parseInt(limit))) limit = 10;
 		pool.getConnection(function (err, conn) {
-			conn.query("call stock_eagle.div_yield(?);", [bound],
+			conn.query("call stock_eagle.div_yield(?,?);", [bound],[limit],
 				function (err, row, fields) {
 					if (err) res.sendStatus(400);
 					res.end(JSON.stringify(row[0]));
