@@ -8,7 +8,7 @@ module.exports = function (app) {
 
 		res.set({ 'content-type': 'application/json; charset=utf-8' })
 
-		
+
 		var security_code = req.params.stockid;
 		pool.getConnection(function (err, conn) {
 			conn.query("call stock_eagle.ohlc(?)",
@@ -43,7 +43,7 @@ module.exports = function (app) {
 		if (isNaN(parseFloat(bound))) bound = 4.5
 		if (isNaN(parseInt(limit))) limit = 10;
 		pool.getConnection(function (err, conn) {
-			conn.query("call stock_eagle.div_yield(?,?);", [bound],[limit],
+			conn.query("call stock_eagle.div_yield(?,?);", [bound,limit],
 				function (err, row, fields) {
 					if (err) res.sendStatus(400);
 					res.end(JSON.stringify(row[0]));
