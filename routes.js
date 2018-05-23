@@ -14,8 +14,9 @@ module.exports = function (app) {
 			conn.query("call stock_eagle.ohlc(?)",
 				[security_code],
 				function (err, row, fields) {
+
+					if (err) { conn.release(); res.sendStatus(400); next(); }
 					conn.release();
-					if (err) { res.sendStatus(400); }
 					res.end(JSON.stringify(row[0]));
 				});
 		})
@@ -28,7 +29,7 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			conn.query('call stock_eagle.wm_diff();',
 				function (err, row, fields) {
-					if (err) res.sendStatus(400);
+					if (err) { conn.release(); res.sendStatus(400); next(); }
 					res.end(JSON.stringify(row[0]));
 				});
 		})
@@ -45,7 +46,7 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 				function (err, row, fields) {
-					if (err) res.sendStatus(400);
+					if (err) { conn.release(); res.sendStatus(400); next(); }
 					res.end(JSON.stringify(row[0]));
 				});
 		})
@@ -62,15 +63,13 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit],
 				function (err, row, fields) {
-					if (err) res.sendStatus(400);
+					if (err) { conn.release(); res.sendStatus(400); next(); }
 					res.end(JSON.stringify(row[0]));
 				});
 		})
 	});
 
 	app.get('/json_test', function (req, res) {
-		res.sendStatus(400);
-		next();
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		res.end(JSON.stringify({ "test": 'ok' }));
 		console.log(req.body);
