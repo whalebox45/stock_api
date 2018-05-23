@@ -1,5 +1,5 @@
 var mysql = require('mysql')
-var login = require('mysql_login.js')
+var login = require('./mysql_login')
 var pool = mysql.createPool({
 	connectionLimit : 10,
 	host: 'localhost',
