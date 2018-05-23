@@ -43,7 +43,7 @@ module.exports = function (app) {
 		if (isNaN(parseFloat(bound))) bound = 4.5
 		if (isNaN(parseInt(limit))) limit = 10;
 		pool.getConnection(function (err, conn) {
-			conn.query("call stock_eagle.div_yield(?,?);", [bound,limit],
+			conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 				function (err, row, fields) {
 					if (err) res.sendStatus(400);
 					res.end(JSON.stringify(row[0]));
@@ -56,17 +56,18 @@ module.exports = function (app) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' })
 
 		var bound = req.query.bound;
+		var limit = req.query.limit;
 		if (isNaN(parseFloat(bound))) bound = 15;
+		if (isNaN(parseInt(limit))) limit = 10;
 		pool.getConnection(function (err, conn) {
-			conn.query('call stock_eagle.pe_ratio(?);', [bound],
+			conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit],
 				function (err, row, fields) {
-					if (err) throw err;
-
+					if (err) res.sendStatus(400);
 					res.end(JSON.stringify(row[0]));
 				});
 		})
 	});
-	
+
 	app.get('/json_test', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		res.end(JSON.stringify({ "test": 'ok' }));
