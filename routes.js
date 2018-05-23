@@ -8,6 +8,7 @@ module.exports = function (app) {
 
 		res.set({ 'content-type': 'application/json; charset=utf-8' })
 
+		
 		var security_code = req.params.stockid;
 		pool.getConnection(function (err, conn) {
 			conn.query("call stock_eagle.ohlc(?)",
