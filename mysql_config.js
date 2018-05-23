@@ -3,8 +3,8 @@ var login = require('mysql_login.js')
 var pool = mysql.createPool({
 	connectionLimit : 10,
 	host: 'localhost',
-	user: userid,
-	password: passwd,
+	user: login.userid,
+	password: login.passwd,
 	database: 'stock_eagle',
 	timezone: 'Z',
 	dateStrings: 'date'
