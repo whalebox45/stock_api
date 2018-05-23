@@ -70,6 +70,7 @@ module.exports = function (app) {
 
 	app.get('/json_test', function (req, res) {
 		res.sendStatus(400);
+		next();
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 		res.end(JSON.stringify({ "test": 'ok' }));
 		console.log(req.body);
