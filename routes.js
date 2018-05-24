@@ -30,8 +30,10 @@ module.exports = function (app) {
 			conn.query('call stock_eagle.wm_diff();',
 				function (err, row, fields) {
 					if (err) { conn.release(); res.sendStatus(400); next(); }
-					res.end(JSON.stringify(row[0]));
-				});
+var sn = {'data':(row[0])};
+console.log(sn);
+res.end(JSON.stringify(sn));				
+});
 		})
 	})
 
@@ -47,7 +49,9 @@ module.exports = function (app) {
 			conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 				function (err, row, fields) {
 					if (err) { conn.release(); res.sendStatus(400); next(); }
-					res.end(JSON.stringify(row[0]));
+var sn = {'data':(row[0])};
+console.log(sn);					
+res.end(JSON.stringify(sn));
 				});
 		})
 	})
@@ -64,8 +68,9 @@ module.exports = function (app) {
 			conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit],
 				function (err, row, fields) {
 					if (err) { conn.release(); res.sendStatus(400); next(); }
-					res.end(JSON.stringify(row[0]));
-				});
+var sn = {'data':(row[0])};
+res.end(JSON.stringify(sn));				
+});
 		})
 	});
 
