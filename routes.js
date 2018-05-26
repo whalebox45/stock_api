@@ -63,13 +63,14 @@ module.exports = function (app) {
 		var bound = req.query.bound;
 		var limit = req.query.limit;
 		var cate = req.query.cate;
+		var query_type = 0;
 
+		if (isNaN(parseFloat(bound))) bound = 15;
+		if (isNaN(parseInt(limit))) limit = 10;
+		if (isNaN(parseInt(cate))) query_type = 1;
+		
 		pool.getConnection(function (err, conn) {
-			var query_type = 0;
 
-			if (isNaN(parseFloat(bound))) bound = 15;
-			if (isNaN(parseInt(limit))) limit = 10;
-			if (isNaN(parseInt(cate))) query_type = 1;
 			switch (query_type) {
 				case 0:
 					conn.query('call stock_eagle.pe_ratio(?,?,?);', [bound, limit, cate], function (err, row, fields) {
