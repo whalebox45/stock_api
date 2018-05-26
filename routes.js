@@ -70,7 +70,7 @@ module.exports = function (app) {
 		if (isNaN(parseInt(limit))) limit = 10;
 		if (isNaN(parseInt(cate))) query_type = 1;
 
-		call = function (err, row, fields) {
+		var call = function (err, row, fields) {
 			if (err) { conn.release(); res.sendStatus(400); next(); }
 			var sn = { 'data': (row[0]) };
 			console.log(sn);
