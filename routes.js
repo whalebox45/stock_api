@@ -68,12 +68,12 @@ module.exports = function (app) {
 		if (isNaN(parseFloat(bound))) bound = 15;
 		if (isNaN(parseInt(limit))) limit = 10;
 		if (isNaN(parseInt(cate))) query_type = 1;
-		
+
 		pool.getConnection(function (err, conn) {
 
 			switch (query_type) {
 				case 0:
-					conn.query('call stock_eagle.pe_ratio(?,?,?);', [bound, limit, cate], function (err, row, fields) {
+					conn.query('call stock_eagle.pe_ratio_cate(?,?,?);', [bound, limit, cate], function (err, row, fields) {
 						if (err) { conn.release(); res.sendStatus(400);}
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
