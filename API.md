@@ -57,7 +57,9 @@
   
   |param|desc|
   |-|-|
-  |`bound=[float]`|選擇出小於bound值的當天本益比資料<br/>若無則預設15
+  |`bound=[float]`|選擇出小於bound值的當天本益比資料<br/>若無則預設15|
+  |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名|
+  |`cate=[int]`|篩選出符合cate值的股票分類代號<br />若無則選出所有分類|
 
 * **Success Response**
     * **Code:** 200 <br/>
@@ -93,6 +95,7 @@
   ```
 ---- 
 
+
 **殖利率**
 ----
 * **URL**
@@ -107,7 +110,9 @@
  |param|desc|
  |-|-|
  |`bound=[float]`|選擇出小於bound值得當日值利率資料<br />否則選擇出小於4.5%的資料|
- |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名
+ |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名|
+ |`cate=[int]`|篩選出符合cate值的股票分類代號<br />若無則選出所有分類|
+
 * **Success Response**
     * **Code:** 200 <br/>
     *  **Content:** 
