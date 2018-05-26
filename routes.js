@@ -58,14 +58,28 @@ module.exports = function (app) {
 
 		var bound = req.query.bound;
 		var limit = req.query.limit;
+		var cate = req.query.cate;
+
+		var query_type = 0;
+
 		if (isNaN(parseFloat(bound))) bound = 15;
 		if (isNaN(parseInt(limit))) limit = 10;
+		if (isNaN(parseInt(cate))) query_type = 1;
+
+		call = function (err, row, fields) {
+			if (err) { conn.release(); res.sendStatus(400); next(); }
+			res.end(JSON.stringify(row[0]));
+		};
+		
 		pool.getConnection(function (err, conn) {
-			conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit],
-				function (err, row, fields) {
-					if (err) { conn.release(); res.sendStatus(400); next(); }
-					res.end(JSON.stringify(row[0]));
-				});
+			switch(query_type){
+				case 0:
+					conn.query('call stock_eagle.pe_ratio(?,?,?);', [bound, limit, cate],call(err,row,fields));
+					break;
+				case 1:
+					conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit], call(err,row,fields));
+					break;
+			}
 		})
 	});
 
