@@ -30,10 +30,10 @@ module.exports = function (app) {
 			conn.query('call stock_eagle.wm_diff();',
 				function (err, row, fields) {
 					if (err) { conn.release(); res.sendStatus(400); next(); }
-var sn = {'data':(row[0])};
-console.log(sn);
-res.end(JSON.stringify(sn));				
-});
+					var sn = { 'data': (row[0]) };
+					console.log(sn);
+					res.end(JSON.stringify(sn));
+				});
 		})
 	})
 
@@ -49,9 +49,9 @@ res.end(JSON.stringify(sn));
 			conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 				function (err, row, fields) {
 					if (err) { conn.release(); res.sendStatus(400); next(); }
-var sn = {'data':(row[0])};
-console.log(sn);					
-res.end(JSON.stringify(sn));
+					var sn = { 'data': (row[0]) };
+					console.log(sn);
+					res.end(JSON.stringify(sn));
 				});
 		})
 	})
@@ -72,33 +72,26 @@ res.end(JSON.stringify(sn));
 
 		call = function (err, row, fields) {
 			if (err) { conn.release(); res.sendStatus(400); next(); }
-			res.end(JSON.stringify(row[0]));
+			var sn = { 'data': (row[0]) };
+			console.log(sn);
+			res.end(JSON.stringify(sn));
 		};
-		
+
 		pool.getConnection(function (err, conn) {
-<<<<<<< HEAD
-			switch(query_type){
+			switch (query_type) {
 				case 0:
-					conn.query('call stock_eagle.pe_ratio(?,?,?);', [bound, limit, cate],call(err,row,fields));
+					conn.query('call stock_eagle.pe_ratio(?,?,?);', [bound, limit, cate], call(err, row, fields));
 					break;
 				case 1:
-					conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit], call(err,row,fields));
+					conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit], call(err, row, fields));
 					break;
 			}
-=======
-			conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit],
-				function (err, row, fields) {
-					if (err) { conn.release(); res.sendStatus(400); next(); }
-var sn = {'data':(row[0])};
-res.end(JSON.stringify(sn));				
-});
->>>>>>> d3047442ff3e041dc386f9f08a327498628f7b15
 		})
 	});
 
 	app.get('/json_test', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
-		res.set("Connection","close");
+		res.set("Connection", "close");
 		res.end(JSON.stringify({ "test": 'ok' }));
 		console.log(req.body);
 	})
