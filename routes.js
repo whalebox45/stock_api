@@ -26,15 +26,38 @@ module.exports = function (app) {
 
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 
+		var limit = req.query.limit
+		var cate = req.query.cate
+		var query_type = 0
+
+		if (isNaN(parseInt(limit))) limit = 10;
+		if (isNaN(parseInt(cate))) query_type = 1;
+
+
 		pool.getConnection(function (err, conn) {
-			conn.query('call stock_eagle.wm_diff();',
-				function (err, row, fields) {
-					if (err) { conn.release(); res.sendStatus(400); return; }
-					var sn = { 'data': (row[0]) };
-					console.log(sn);
-					res.end(JSON.stringify(sn));
-				});
+			switch (query_type) {
+				case 0:
+					conn.query('call stock_eagle.week_month_diff_cc(?,?)',
+						[limit, cate], function (err, row, fields) {
+							if (err) { conn.release(); res.sendStatus(400); return; }
+							var sn = { 'data': (row[0]) };
+							console.log(sn);
+							res.end(JSON.stringify(sn));
+						});
+					break;
+
+				case 1:
+					conn.query('call stock_eagle.week_month_diff(?);', [limit],
+						function (err, row, fields) {
+							if (err) { conn.release(); res.sendStatus(400); return; }
+							var sn = { 'data': (row[0]) };
+							console.log(sn);
+							res.end(JSON.stringify(sn));
+						});
+					break;
+			}
 		})
+
 	})
 
 	app.get('/trade_vol_diff', function (req, res) {
@@ -64,7 +87,7 @@ module.exports = function (app) {
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
-					});
+						});
 					break;
 			}
 		})

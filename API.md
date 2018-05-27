@@ -42,6 +42,54 @@
   ```
 ----
 
+
+
+
+**周月波動率差距**
+----
+* **URL**
+  `/trade_vol_diff`
+* **method**
+  `GET`
+* **URL Params**
+  None
+* **Data Params**
+  * Optional
+  
+  |param|desc|
+  |-|-|
+  |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名|
+  |`cate=[int]`|篩選出符合cate值的股票分類代號<br />若無則選出所有分類|
+
+* **Success Response**
+    * **Code:** 200 <br/>
+    *  **Content:** 
+    ```js
+    "data": [
+    
+    ...
+    ]
+    ```
+* **Error Response**
+    * **Code:** 404 <br/>
+    * **Content:** `{'error','Not found'}`
+* **Sample Call:**
+  ```javascript
+    $.ajax({
+      url: "/price_diff?limit=15&cate=13",
+      datatype: "json",
+      type: "GET",
+      success: function(r){
+        console.log(r);
+      }
+    })
+  ```
+---- 
+
+
+
+
+
 **成交量波動幅度**
 ----
 * **URL**
@@ -98,6 +146,10 @@
 
 
 
+
+
+
+
 **本益比**
 ----
 * **URL**
@@ -150,6 +202,11 @@
 ---- 
 
 
+
+
+
+
+
 **殖利率**
 ----
 * **URL**
@@ -200,6 +257,10 @@
     })
   ```
 ---
+
+
+
+
 
 **測試請求**
 ----
