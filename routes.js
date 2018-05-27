@@ -29,11 +29,42 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			conn.query('call stock_eagle.wm_diff();',
 				function (err, row, fields) {
-					if (err) { conn.release(); res.sendStatus(400); return;}
+					if (err) { conn.release(); res.sendStatus(400); return; }
 					var sn = { 'data': (row[0]) };
 					console.log(sn);
 					res.end(JSON.stringify(sn));
 				});
+		})
+	})
+
+	app.get('/trade_vol', function (req, res) {
+		res.set({ 'content-type': 'application/json; charset=utf-8' })
+
+		var limit = req.query.limit
+		var cate = req.query.cate
+		var query_type = 0
+		if (isNaN(parseInt(cate))) query_type = 1;
+
+		pool.getConnection(function (err, conn) {
+			switch (query_type) {
+				case 0:
+					conn.query('call trade_vol(?,?)', [limit, cate], function (err, row, fields) {
+						if (err) { conn.release(); res.sendStatus(400); return; }
+						var sn = { 'data': (row[0]) };
+						console.log(sn);
+						res.end(JSON.stringify(sn));
+					});
+					break;
+				case 1:
+					conn.query('call trade_vol(?)', [limit],
+						function (err, row, fields) {
+							if (err) { conn.release(); res.sendStatus(400); return; }
+							var sn = { 'data': (row[0]) };
+							console.log(sn);
+							res.end(JSON.stringify(sn));
+					});
+					break;
+			}
 		})
 	})
 
@@ -53,9 +84,9 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			switch (query_type) {
 				case 0:
-					conn.query("call stock_eagle.div_yield_cc(?,?,?)", [bound,limit,cate],
-						function(err,row,fields){
-							if (err) { conn.release(); res.sendStatus(400); return;}
+					conn.query("call stock_eagle.div_yield_cc(?,?,?)", [bound, limit, cate],
+						function (err, row, fields) {
+							if (err) { conn.release(); res.sendStatus(400); return; }
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -64,7 +95,7 @@ module.exports = function (app) {
 				case 1:
 					conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 						function (err, row, fields) {
-							if (err) { conn.release(); res.sendStatus(400); return;}
+							if (err) { conn.release(); res.sendStatus(400); return; }
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -94,7 +125,7 @@ module.exports = function (app) {
 			switch (query_type) {
 				case 0:
 					conn.query('call stock_eagle.pe_ratio_cate(?,?,?);', [bound, limit, cate], function (err, row, fields) {
-						if (err) { conn.release(); res.sendStatus(400); return;}
+						if (err) { conn.release(); res.sendStatus(400); return; }
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
 						res.end(JSON.stringify(sn));
@@ -102,7 +133,7 @@ module.exports = function (app) {
 					break;
 				case 1:
 					conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit], function (err, row, fields) {
-						if (err) { conn.release(); res.sendStatus(400); return;}
+						if (err) { conn.release(); res.sendStatus(400); return; }
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
 						res.end(JSON.stringify(sn));
@@ -114,7 +145,7 @@ module.exports = function (app) {
 
 	app.get('/json_test', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
-		res.set("Connection", "close");
+		res.set({ "Connection": "close" });
 		res.end(JSON.stringify({ "test": 'ok' }));
 		console.log(req.body);
 	})
