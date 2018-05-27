@@ -50,7 +50,7 @@ module.exports = function (app) {
 		pool.getConnection(function (err, conn) {
 			switch (query_type) {
 				case 0:
-					conn.query('call trade_vol(?,?)', [limit, cate], function (err, row, fields) {
+					conn.query('call trade_vol_cc(?,?)', [limit, cate], function (err, row, fields) {
 						if (err) { conn.release(); res.sendStatus(400); return; }
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
