@@ -37,7 +37,7 @@ module.exports = function (app) {
 		})
 	})
 
-	app.get('/trade_vol', function (req, res) {
+	app.get('/trade_vol_diff', function (req, res) {
 		res.set({ 'content-type': 'application/json; charset=utf-8' })
 
 		var limit = req.query.limit

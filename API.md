@@ -42,6 +42,60 @@
   ```
 ----
 
+**成交量波動幅度**
+----
+* **URL**
+  `/trade_vol_diff`
+* **method**
+  `GET`
+* **URL Params**
+  None
+* **Data Params**
+  * Optional
+  
+  |param|desc|
+  |-|-|
+  |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名|
+  |`cate=[int]`|篩選出符合cate值的股票分類代號<br />若無則選出所有分類|
+
+* **Success Response**
+    * **Code:** 200 <br/>
+    *  **Content:** 
+    ```js
+    "data": [
+    {
+      "security_code": "1110",
+      "name": "東泥",
+      "date": "2018-05-25",
+      "vol_diff": 31208,
+      "vol_diff_rate(%)": 213.534
+    },
+    {
+      "security_code": "1109",
+      "name": "信大",
+      "date": "2018-05-25",
+      "vol_diff": -293175,
+      "vol_diff_rate(%)": 65.116
+    },
+    ...
+    ]
+    ```
+* **Error Response**
+    * **Code:** 404 <br/>
+    * **Content:** `{'error','Not found'}`
+* **Sample Call:**
+  ```javascript
+    $.ajax({
+      url: "/trade_vol_diff?limit=2&cate=13",
+      datatype: "json",
+      type: "GET",
+      success: function(r){
+        console.log(r);
+      }
+    })
+  ```
+---- 
+
 
 
 **本益比**
