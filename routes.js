@@ -43,6 +43,8 @@ module.exports = function (app) {
 		var limit = req.query.limit
 		var cate = req.query.cate
 		var query_type = 0
+
+		if (isNaN(parseInt(limit))) limit = 10;
 		if (isNaN(parseInt(cate))) query_type = 1;
 
 		pool.getConnection(function (err, conn) {
