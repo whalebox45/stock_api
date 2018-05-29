@@ -285,6 +285,59 @@
   ```
 ---
 
+**股利發放率(%)**
+----
+* **URL**
+ `/dp_ratio`
+* **Method**
+ `GET`
+* **URL Params**
+ None
+* **Data Params**
+ * Optional
+
+ |param|desc|
+ |-|-|
+ |`bound=[float]`|選擇出小於bound值得當日值利率資料<br />否則選擇出大於85%的資料|
+ |`limit=[int]`|篩選出前數名資料,數量為limit值<br />若無則選10名|
+ |`cate=[int]`|篩選出符合cate值的股票分類代號<br />若無則選出所有分類|
+
+* **Success Response**
+    * **Code:** 200 <br/>
+    *  **Content:** 
+  
+    ```js
+    {
+      "data": [
+        {
+          "date": "2018-05-28",
+          "security_code": 2527,
+          "name": "宏璟",
+          "dividend_payout_ratio(%)": 7999.2
+        },
+        {
+          "date": "2018-05-28",
+          "security_code": 2369,
+          "name": "菱生",
+          "dividend_payout_ratio(%)": 2501.6
+        },
+    ```
+* **Error Response**
+    * **Code:** 404 <br/>
+    *  **Content:** `{'error','Not found'}`
+* **Sample Call:**
+  ```javascript
+    $.ajax({
+      url: "/dp_ratio?bound=50&limit=20",
+      datatype: "json",
+      type: "GET",
+      success: function(r){
+        console.log(r);
+      }
+    })
+  ```
+---
+
 
 
 
