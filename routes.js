@@ -14,10 +14,11 @@ module.exports = function (app) {
 			conn.query("call stock_eagle.ohlc(?)",
 				[security_code],
 				function (err, row, fields) {
-
 					if (err) { conn.release(); res.sendStatus(400); return; }
 					conn.release();
-					res.end(JSON.stringify(row[0]));
+					var sn = { 'data': (row[0]) };
+					console.log(sn);
+					res.end(JSON.stringify(sn));
 				});
 		})
 	})
@@ -40,6 +41,7 @@ module.exports = function (app) {
 					conn.query('call stock_eagle.week_month_diff_cc(?,?)',
 						[limit, cate], function (err, row, fields) {
 							if (err) { conn.release(); res.sendStatus(400); return; }
+							conn.release();
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -50,6 +52,7 @@ module.exports = function (app) {
 					conn.query('call stock_eagle.week_month_diff(?);', [limit],
 						function (err, row, fields) {
 							if (err) { conn.release(); res.sendStatus(400); return; }
+							conn.release();
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -75,6 +78,7 @@ module.exports = function (app) {
 				case 0:
 					conn.query('call trade_vol_cc(?,?)', [limit, cate], function (err, row, fields) {
 						if (err) { conn.release(); res.sendStatus(400); return; }
+						conn.release();
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
 						res.end(JSON.stringify(sn));
@@ -84,6 +88,7 @@ module.exports = function (app) {
 					conn.query('call trade_vol(?)', [limit],
 						function (err, row, fields) {
 							if (err) { conn.release(); res.sendStatus(400); return; }
+							conn.release();
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -112,6 +117,7 @@ module.exports = function (app) {
 					conn.query("call stock_eagle.div_yield_cc(?,?,?)", [bound, limit, cate],
 						function (err, row, fields) {
 							if (err) { conn.release(); res.sendStatus(400); return; }
+							conn.release();
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -121,6 +127,7 @@ module.exports = function (app) {
 					conn.query("call stock_eagle.div_yield(?,?);", [bound, limit],
 						function (err, row, fields) {
 							if (err) { conn.release(); res.sendStatus(400); return; }
+							conn.release();
 							var sn = { 'data': (row[0]) };
 							console.log(sn);
 							res.end(JSON.stringify(sn));
@@ -151,6 +158,7 @@ module.exports = function (app) {
 				case 0:
 					conn.query('call stock_eagle.pe_ratio_cate(?,?,?);', [bound, limit, cate], function (err, row, fields) {
 						if (err) { conn.release(); res.sendStatus(400); return; }
+						conn.release();
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
 						res.end(JSON.stringify(sn));
@@ -159,6 +167,7 @@ module.exports = function (app) {
 				case 1:
 					conn.query('call stock_eagle.pe_ratio(?,?);', [bound, limit], function (err, row, fields) {
 						if (err) { conn.release(); res.sendStatus(400); return; }
+						conn.release();
 						var sn = { 'data': (row[0]) };
 						console.log(sn);
 						res.end(JSON.stringify(sn));
