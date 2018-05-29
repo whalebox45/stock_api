@@ -17,7 +17,6 @@ module.exports = function (app) {
 					if (err) { conn.release(); res.sendStatus(400); return; }
 					conn.release();
 					var sn = { 'data': (row[0]) };
-					console.log(sn);
 					res.end(JSON.stringify(sn));
 				});
 		})

@@ -17,14 +17,30 @@
   * **Code:** 200 <br />
   * **Content:** 
   ```javascript
-  {"date":"2018-05-18",
-  "security_code":"1101",
-  "name":"台泥",
-  "open_price":"46.00",
-  "high_price":"46.15",
-  "low_price":"45.10",
-  "close_price":"45.55"},
+  {
+  "data": [
+    {
+      "date": "2018-05-28",
+      "security_code": "1234",
+      "name": "黑松",
+      "trade_volume": 47008,
+      "open_price": "31.55",
+      "close_price": "31.65",
+      "high_price": "31.65",
+      "low_price": "31.50"
+    },
+    {
+      "date": "2018-05-25",
+      "security_code": "1234",
+      "name": "黑松",
+      "trade_volume": 77458,
+      "open_price": "31.45",
+      "close_price": "31.55",
+      "high_price": "31.65",
+      "low_price": "31.45"
+    },
   ...
+  ]}
   ```
 * **Error Response:**
   * **Code:** 404 NOT FOUND <br />
