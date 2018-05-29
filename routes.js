@@ -132,6 +132,41 @@ module.exports = function (app) {
 		})
 	})
 
+	app.get('/dp_ratio' , function(req,res){
+		res.set({ 'content-type': 'application/json; charset=utf-8' })
+
+		var bound = req.query.bound;
+		var limit = req.query.limit;
+		var cate = req.query.cate;
+		var query_type = 0;
+
+		if (isNaN(parseFloat(bound))) bound = 85;
+		if (isNaN(parseInt(limit))) limit = 10;
+		if (isNaN(parseInt(cate))) query_type = 1;
+
+		pool.getConnection(function (err, conn) {
+
+			switch (query_type) {
+				case 0:
+					conn.query('call stock_eagle.dp_ratio_cc(?,?,?);', [bound, limit, cate], function (err, row, fields) {
+						if (err) { conn.release(); res.sendStatus(400); return; }
+						conn.release();
+						var sn = { 'data': (row[0]) };
+						res.end(JSON.stringify(sn));
+					});
+					break;
+				case 1:
+					conn.query('call stock_eagle.dp_ratio(?,?);', [bound, limit], function (err, row, fields) {
+						if (err) { conn.release(); res.sendStatus(400); return; }
+						conn.release();
+						var sn = { 'data': (row[0]) };
+						res.end(JSON.stringify(sn));
+					});
+					break;
+			}
+		})
+	});
+
 	app.get('/pe_ratio', function (req, res) {
 
 		res.set({ 'content-type': 'application/json; charset=utf-8' })
