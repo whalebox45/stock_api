@@ -86,13 +86,13 @@
       "date": "2018-05-25",
       "security_code": "9958",
       "name": "世紀鋼",
-      "wm_diff(%)": 45.61
+      "wm_diff_pct": 45.61
     },
     {
       "date": "2018-05-25",
       "security_code": "3708",
       "name": "上緯投控",
-      "wm_diff(%)": 34.87
+      "wm_diff_pct": 34.87
     },
     ...
     ]
@@ -143,14 +143,14 @@
       "name": "東泥",
       "date": "2018-05-25",
       "vol_diff": 31208,
-      "vol_diff_rate(%)": 213.534
+      "vol_diff_rate_pct": 213.534
     },
     {
       "security_code": "1109",
       "name": "信大",
       "date": "2018-05-25",
       "vol_diff": -293175,
-      "vol_diff_rate(%)": 65.116
+      "vol_diff_rate_pct": 65.116
     },
     ...
     ]
@@ -313,13 +313,13 @@
           "date": "2018-05-28",
           "security_code": 2527,
           "name": "宏璟",
-          "dividend_payout_ratio(%)": 7999.2
+          "dividend_payout_ratio_pct": 7999.2
         },
         {
           "date": "2018-05-28",
           "security_code": 2369,
           "name": "菱生",
-          "dividend_payout_ratio(%)": 2501.6
+          "dividend_payout_ratio_pct": 2501.6
         },
     ```
 * **Error Response**
