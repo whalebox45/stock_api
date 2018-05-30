@@ -64,7 +64,7 @@
 **周月波動率差距**
 ----
 * **URL**
-  `/trade_vol_diff`
+  `/price_diff`
 * **method**
   `GET`
 * **URL Params**
