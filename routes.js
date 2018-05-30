@@ -22,7 +22,7 @@ module.exports = function (app) {
 		})
 	})
 
-	app.get('/price_diff', function (req, res) {
+	app.get('/wm_diff', function (req, res) {
 
 		res.set({ 'content-type': 'application/json; charset=utf-8' });
 
