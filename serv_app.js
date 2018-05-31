@@ -23,7 +23,7 @@ app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:htt
 require('./routes')(app);
 
 
-var server = app.listen(7153, function () {
+var server = app.listen(7153,'localhost', function () {
   var host = server.address().address
   var port = server.address().port
   console.log("Web app listening at http://%s:%s", host, port)
