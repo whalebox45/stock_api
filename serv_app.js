@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(morgan('short'));
+app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'));
 
 require('./routes')(app);
 
